@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class ModelConfig:
-    model_name: str = "unsloth/gemma-3-1b-it"
+    model_name: str = "unsloth/Qwen2.5-1.5B-Instruct" #"unsloth/gemma-3-1b-it"
     max_seq_length: int = 1024
     load_in_4bit: bool = False
     load_in_8bit: bool = False
@@ -42,9 +42,9 @@ class TrainingConfig:
     lr_scheduler_type: str = "cosine"
     optim: str = "adamw_torch_fused"
     logging_steps: int = 1
-    per_device_train_batch_size: int = 1
+    per_device_train_batch_size: int = 4 #1
     gradient_accumulation_steps: int = 1
-    num_generations: int = 4
+    num_generations: int = 4 #4
     max_steps: int = 50
     save_steps: int = 50
     max_grad_norm: float = 0.1
