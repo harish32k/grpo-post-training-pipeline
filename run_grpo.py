@@ -1,6 +1,7 @@
+import unsloth
+
 from src.config import ModelConfig, PromptConfig, TrainingConfig
 from src.data import build_dataset
-from src.inference import run_inference
 from src.modeling import attach_lora_adapters, load_model_and_tokenizer
 from src.rewards import build_reward_functions
 from src.save import (
@@ -11,6 +12,7 @@ from src.save import (
     save_merged_if_enabled,
 )
 from src.train import build_trainer, build_training_args
+from src.inference import run_inference
 
 
 def main():
