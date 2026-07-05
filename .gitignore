@@ -42,3 +42,6 @@ backup/
 !.env.example
 
 __pycache__/
+wandb/
+grpo_trainer_lora_model_0
+batch_scripts/run_logs

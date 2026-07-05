@@ -23,7 +23,8 @@ def build_training_args(model_config: ModelConfig, training_config: TrainingConf
         max_grad_norm=training_config.max_grad_norm,
         report_to=training_config.report_to,
         output_dir=training_config.output_dir,
-        use_vllm=False,
+        use_vllm=True,
+        log_completions=True,
         # vllm_kwargs={
         #     "enforce_eager": True,          # Disables CUDA graphs to save ~1.5GB VRAM
         #     # "gpu_memory_utilization": 0.3, # Adjust to share VRAM with the trainer

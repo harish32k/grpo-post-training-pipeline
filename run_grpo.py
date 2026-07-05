@@ -1,6 +1,12 @@
+import os
+os.environ["UNSLOTH_VLLM_STANDBY"] = "1"
+# os.environ["VLLM_DISABLE_COMPILE"] = "1"
+
+
+import unsloth
+
 from src.config import ModelConfig, PromptConfig, TrainingConfig
 from src.data import build_dataset
-from src.inference import run_inference
 from src.modeling import attach_lora_adapters, load_model_and_tokenizer
 from src.rewards import build_reward_functions
 from src.save import (
@@ -11,7 +17,20 @@ from src.save import (
     save_merged_if_enabled,
 )
 from src.train import build_trainer, build_training_args
+from src.inference import run_inference
+import wandb
 
+os.environ["WANDB_PROJECT"] = "unsloth-grpo"
+os.environ["WANDB_LOG_MODEL"] = "false"   # avoids uploading big model files
+
+wandb.init(
+    project="unsloth-grpo",
+    name="qwen2.5-1.5b-grpo-test",
+    config={
+        "model": "unsloth/Qwen2.5-1.5B-Instruct",
+        "method": "GRPO",
+    }
+)
 
 def main():
     model_config = ModelConfig()
@@ -33,6 +52,7 @@ def main():
         training_args=training_args,
     )
     trainer.train()
+    wandb.finish()
 
     run_inference(
         model=model,
