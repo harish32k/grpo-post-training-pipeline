@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Logs
+logs/
+*.log
+error_log.txt
+
+# Model/output artifacts
+outputs/
+gemma_3_lora/
+unsloth_compiled_cache/
+checkpoint-*/
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Local backups/cache
+backup/
+.cache/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Secrets/env
+.env
+.env.*
+!.env.example
+
+__pycache__/
+wandb/
+grpo_trainer_lora_model_0
+batch_scripts/run_logs

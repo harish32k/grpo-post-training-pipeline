@@ -3,13 +3,13 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class ModelConfig:
-    model_name: str = "unsloth/gemma-3-1b-it"
-    max_seq_length: int = 1024
-    load_in_4bit: bool = False
+    model_name: str = "unsloth/Qwen2.5-1.5B-Instruct" #"unsloth/gemma-3-1b-it"
+    max_seq_length: int = 1600
+    load_in_4bit: bool = True
     load_in_8bit: bool = False
     full_finetuning: bool = False
-    lora_r: int = 8
-    lora_alpha: int = 8
+    lora_r: int = 16
+    lora_alpha: int = 16
     lora_dropout: float = 0.0
     random_state: int = 3407
 
@@ -42,11 +42,11 @@ class TrainingConfig:
     lr_scheduler_type: str = "cosine"
     optim: str = "adamw_torch_fused"
     logging_steps: int = 1
-    per_device_train_batch_size: int = 1
+    per_device_train_batch_size: int = 6 #1
     gradient_accumulation_steps: int = 1
-    num_generations: int = 4
-    max_steps: int = 50
-    save_steps: int = 50
+    num_generations: int = 6 #4
+    max_steps: int = 400
+    save_steps: int = 400
     max_grad_norm: float = 0.1
-    report_to: str = "none"
+    report_to: str = "wandb"
     output_dir: str = "outputs"
