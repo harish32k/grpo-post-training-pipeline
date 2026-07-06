@@ -86,10 +86,40 @@ def build_reward_functions(prompt_config: PromptConfig):
             except Exception:
                 scores.append(0.0)
         return scores
+    
+    def check_answer_euclidean(prompts, completions, answer, **kwargs):
+        responses = [completion[0]["content"] for completion in completions]
+        extracted_responses = [
+            guess.group(1) if (guess := match_numbers.search(response)) is not None else None
+            for response in responses
+        ]
+
+        scores = []
+        for guess, true_answer in zip(extracted_responses, answer):
+            if guess is None:
+                scores.append(0.0)
+                continue
+
+            try:
+                guess_value = float(guess.strip())
+                true_value = float(true_answer.strip())
+
+                rel_error = abs(guess_value - true_value) / max(abs(true_value), 1.0)
+
+                score = 1.0 - rel_error
+                score = max(-2.0, score)   # clip lower bound only
+
+                scores.append(score)
+
+            except Exception:
+                scores.append(0.0)
+
+        return scores
 
     return [
         match_format_exactly,
-        match_format_approximately,
-        check_answer,
-        check_numbers,
+        # match_format_approximately,
+        # check_answer
+        # check_numbers,
+        check_answer_euclidean
     ]
