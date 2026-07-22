@@ -1,6 +1,6 @@
-GRPO Unsloth Example
+GRPO Post-Training Pipeline
 
-This repo is a lightweight Python split of a GRPO training notebook using Unsloth, TRL, and the GSM8K dataset. The code loads a Gemma 3 instruct model, adds LoRA adapters, builds reward functions for reasoning-format supervision, trains with `GRPOTrainer`, runs a quick inference example, and saves LoRA weights.
+This repo is a modular GRPO post-training pipeline using Unsloth, TRL, and the GSM8K dataset. The code loads a Gemma 3 instruct model, adds LoRA adapters, builds reward functions for reasoning-format supervision, trains with `GRPOTrainer`, runs a quick inference example, and saves LoRA weights.
 
 Project Layout
 
@@ -12,7 +12,7 @@ Project Layout
 - `src/train.py`: GRPO config and trainer construction
 - `src/inference.py`: sample generation after training
 - `src/save.py`: local save and optional export helpers
-- `backup/`: notebook-derived reference files kept for comparison
+- `backup/`: reference files from an earlier prototype
 
 What The Script Does
 
@@ -32,7 +32,7 @@ What The Script Does
 
 Requirements
 
-You need a Python environment with the relevant training dependencies installed separately. The split code does not include the notebook installation cells. At minimum, the script expects imports from:
+Dependencies are not installed by the script. At minimum, the script expects imports from:
 
 - `unsloth`
 - `trl`
@@ -81,5 +81,5 @@ The helper functions in `src/save.py` also include optional merged-model and GGU
 Notes
 
 - The current code logs training metrics through the trainer, but it does not create reward plots.
-- The original notebook included extra environment/setup cells in `backup/`; not all notebook runtime flags were copied into the split Python workflow.
-- If you want behavior closer to the original notebook, review the files in `backup/` and selectively carry over any needed runtime configuration.
+- The backup/ directory contains files from an earlier prototype; not all runtime flags were carried over.
+- Review the files in backup/ for additional runtime configuration options.
